@@ -8,9 +8,9 @@ public class Sword : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            Debug.Log("1");
+            //Debug.Log("1");
             Enemy scEnemy = other.gameObject.GetComponent<Enemy>();
-            //scEnemy.hit(1f);
+            scEnemy.hit(1f);
         }
 
     }

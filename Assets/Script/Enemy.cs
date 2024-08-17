@@ -29,6 +29,6 @@ public class Enemy : MonoBehaviour
 
     public void hit(float _damage)
     {
-        curHp =-_damage;
+        curHp -=_damage;
     }
 }

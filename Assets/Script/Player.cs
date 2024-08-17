@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private Collider AttackRange;
 
+    private GameObject targetEnemy;
+
     public enum PlayerState
     {
         idle,
@@ -74,12 +76,14 @@ public class Player : MonoBehaviour
                 }
                 else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
                 {
+                    targetEnemy = hit.transform.gameObject;
                     isMove = true;
                     isAttack = true;
                     state = PlayerState.walk;
                     targetPos = hit.point;
                     transform.LookAt(targetPos);
                     Debug.Log("°ø°Ý");
+                    
                 }
             }
         }
@@ -101,7 +105,7 @@ public class Player : MonoBehaviour
             Debug.Log("µµÂø");
         }
 
-        if (isAttack == true && Vector3.Distance(transform.position, targetPos) <= 1.8f)
+        if (isAttack == true && Vector3.Distance(transform.position, targetPos) <= 1.5f)
         {
             isMove = false;
             transform.LookAt(targetPos);
@@ -110,6 +114,13 @@ public class Player : MonoBehaviour
         }
 
         if (targetPos == null)
+        {
+            isMove = false;
+            isAttack = false;
+            state = PlayerState.idle;
+        }
+
+        if (state == PlayerState.attack && targetEnemy == null)
         {
             isMove = false;
             isAttack = false;
